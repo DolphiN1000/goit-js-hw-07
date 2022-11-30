@@ -10,17 +10,14 @@ const href = {
 let gallArray = [];
 const gallArr = [];
 for (const { preview, original, description } of galleryItems) {
-  gallArr.push(`<div class="gallery__item">
-    <a class="gallery__link" href="${original}">
+  gallArr.push(`
+    <a class="gallery__item" href="${original}">
       <img
         class="gallery__image"
         src="${preview}"
-        data-source="${original}"
         alt="${description}"
-        onclick="return false"
       />
-    </a>
-    </div>`);
+    </a>`);
 }
 gallArray = gallArr.join("");
 console.log(gallArr);
@@ -32,4 +29,8 @@ href.listGall.addEventListener("click", (event) => {
 
 var lightbox = new SimpleLightbox(".gallery a", {
   /* options */
+  captions: true,
+  captionsData: "alt",
+  captionAttribute: 'title',
+  captionDelay: 250,
 });
