@@ -7,30 +7,28 @@ const href = {
   listGall: document.querySelector(".gallery"),
 };
 
-let gallArray = [];
-const gallArr = [];
-for (const { preview, original, description } of galleryItems) {
-  gallArr.push(`
-    <a class="gallery__item" href="${original}">
-      <img
-        class="gallery__image"
-        src="${preview}"
-        alt="${description}"
-      />
-    </a>`);
-}
-gallArray = gallArr.join("");
-console.log(gallArr);
+let gallArray = galleryItems
+  .map(({ preview, original, description } = galleryItem) => {
+    return `<div class="gallery__item">
+      <a class="gallery__link" href="${original}">
+        <img
+          // class="gallery__image"
+          src="${preview}"
+          data-source="${original}"
+          alt="${description}"
+          onclick="return false"
+        />
+      </a>
+      </div>`;
+  })
+  .join("");
 
 href.listGall.insertAdjacentHTML("beforeend", gallArray);
-href.listGall.addEventListener("click", (event) => {
-  console.log("event.target: ", event.target);
-});
 
 var lightbox = new SimpleLightbox(".gallery a", {
   /* options */
   captions: true,
   captionsData: "alt",
-  captionAttribute: 'title',
+  captionAttribute: "title",
   captionDelay: 250,
 });
